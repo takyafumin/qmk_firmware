@@ -28,7 +28,7 @@ enum custom_keycodes {
 };
 
 enum custom_tapdance_keys {
-    TD_QA,
+    TD_Q_ESC,
     TD_MINS,
     TD_BSLS,
     TD_GRV,
@@ -71,7 +71,7 @@ void td_rbrc_finished(tap_dance_state_t *state, void *user_data) {
 };
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_QA]     = ACTION_TAP_DANCE_DOUBLE(KC_Q,    KC_A),
+    [TD_Q_ESC]  = ACTION_TAP_DANCE_DOUBLE(KC_Q,    KC_A),
     [TD_MINS]   = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_UNDS),
     [TD_BSLS]   = ACTION_TAP_DANCE_DOUBLE(KC_PIPE, KC_BSLS),
     [TD_GRV]    = ACTION_TAP_DANCE_DOUBLE(KC_TILD, KC_GRV),
@@ -89,9 +89,9 @@ tap_dance_action_t tap_dance_actions[] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LCTL_T(KC_A):
-      return TAPPING_TERM + 20;
+      return TAPPING_TERM + 30;
     case RCTL_T(KC_SCLN):
-      return TAPPING_TERM + 20;
+      return TAPPING_TERM + 30;
     default:
       return TAPPING_TERM;
   }
@@ -107,7 +107,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #define RS_SLSH  RSFT_T(KC_SLSH)
 #define RA_TAB   RALT_T(KC_TAB)
 #define LG_TAB   LGUI_T(KC_TAB)
-#define DD_QA    TD(TD_QA)
+#define DD_QESC  TD(TD_Q_ESC)
 #define DD_EQL   TD(TD_EQL)
 #define DD_MINS  TD(TD_MINS)
 #define DD_LBRC  TD(TD_LBRC)
@@ -123,43 +123,43 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            _______,   DD_QA,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, _______,
+            _______, DD_QESC,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,    CT_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, CT_SCLN, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,    LS_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, RS_SLSH, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                 LG_TAB,MY_RAISE,  KC_SPC,     KC_ENT,   MO(2),  RA_TAB
+                                                 RA_TAB,MY_RAISE,  KC_SPC,     KC_ENT,MY_LOWER,  LG_TAB
                                             //`--------------------------'  `--------------------------'
   ),
 
   [1] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,------------------------------------------------------
-        //         ,     !  ,     @  ,     #  ,     $  ,    %   ,                    ,     ^  ,     &  ,     *  ,    \   ,     ~  ,
+        //         ,     !  ,     @  ,     #  ,     $  ,     %  ,                    ,     ^  ,     &  ,     *  , PrtScr ,    DEL ,
         //,------------------------------------------------------.                    ,-----------------------------------------------------.
-        //         , LAYER3 ,        ,  HOME  ,   END  ,    ~   ,                    ,   ([{  ,    -   ,     =  ,   '"   ,     :  ,
+        //         , LAYER3 ,        ,        ,     (  ,     '  ,                    ,  left  ,  down  ,    up  , right  ,     :  ,
         //,------------------------------------------------------.                    ,-----------------------------------------------------.
-        //         ,  SHIFT ,        ,        ,        ,        ,                    ,   )]}  ,     \  ,     <  ,    >   ,     ?  ,
+        //         ,  SHIFT ,        ,        ,     )  ,     `  ,                    ,     '  ,     -  ,     =  ,        ,     ?  ,
         //,------------------------------------------------------.                    ,-----------------------------------------------------.
-            _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_BSLS,  KC_GRV, _______,
+            _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR,  KC_EQL, KC_MINS, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______, KC_LCTL, XXXXXXX, KC_PGUP,  KC_ESC,  DD_GRV,                      DD_LBRC, KC_MINS,  KC_EQL, DD_QUOT, MYC_CLN, _______,
+            _______,   TG(3), XXXXXXX, KC_BSLS, DD_QUOT, DD_BSLS,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, MYC_CLN, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______, KC_LSFT, KC_HOME, KC_PGDN,  KC_END, KC_PSCR,                      DD_RBRC, DD_BSLS,   KC_LT,   KC_GT, MYS_QES, _______,
+            _______, KC_LSFT, KC_HOME,  KC_GRV,  KC_END,  DD_GRV,                      DD_LBRC, DD_RBRC,   KC_LT,   KC_GT, MYS_QES, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                KC_LGUI, _______, _______,    KC_BSPC, KC_LNG1, KC_RALT
+                                                KC_RALT, _______, _______,    KC_BSPC,  KC_ESC, KC_LGUI
                                             //`--------------------------'  `--------------------------'
         ),
 
   [2] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+            _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______,
+        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_LCTL, _______,
-        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                       KC_F11,  KC_F12, _______, _______, KC_RSFT, _______,
+            _______, KC_LSFT, XXXXXXX, XXXXXXX, KC_PSCR,  KC_DEL,                      XXXXXXX, XXXXXXX, XXXXXXX,  KC_F11,  KC_F12, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                KC_LGUI,   TG(3),  KC_DEL,    _______, _______, _______
+                                                _______,  KC_ESC, _______,    _______, _______, _______
                                             //`--------------------------'  `--------------------------'
   ),
 
@@ -171,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX,
        //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                               _______,   TG(3), _______,    _______,   TG(3), _______
+                                               _______, _______, _______,    _______,   TG(3), _______
                                            //`--------------------------'  `--------------------------'
   )
 };
@@ -294,7 +294,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(1);
             } else {
                 layer_off(1);
-                if (layer_switch_pressed) {
+                if  (layer_switch_pressed) {
                     tap_code(KC_LNG2);
                 }
                 layer_switch_pressed = false;
@@ -307,7 +307,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(2);
             } else {
                 layer_off(2);
-                if (layer_switch_pressed) {
+                if  (layer_switch_pressed) {
                     tap_code(KC_LNG1);
                 }
                 layer_switch_pressed = false;
