@@ -23,8 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
     MYC_CLN = SAFE_RANGE,
     MYS_QES,
-    MY_RAISE,
-    MY_LOWER,
+    //MY_RAISE,
+    //MY_LOWER,
 };
 
 enum custom_tapdance_keys {
@@ -117,6 +117,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #define DD_GRV   TD(TD_GRV)
 /* #define DD_COMM  TD(TD_COMM) */
 /* #define DD_DOT   TD(TD_DOT) */
+#define SPC  KC_SPC
+#define ESC  KC_ESC
+#define LG1  KC_LNG1
+#define LG2  KC_LNG2
 
 
 
@@ -129,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,    LS_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, RS_SLSH, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                 CT_TAB,MY_RAISE,  KC_SPC,     KC_ENT,   MO(2),  RA_TAB
+                                                KC_LCTL,LT(1,LG2),LT(3,SPC),   KC_ENT,LT(2,ESC),KC_RALT
                                             //`--------------------------'  `--------------------------'
   ),
 
@@ -155,11 +159,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
             _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_LCTL, _______,
+            _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_TAB, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                       KC_F11,  KC_F12, KC_PSCR, _______, KC_RSFT, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                KC_PSCR,   TG(3),  KC_DEL,    _______, _______, _______
+                                                _______, KC_RALT,  KC_DEL,    _______, _______, _______
                                             //`--------------------------'  `--------------------------'
   ),
 
@@ -288,31 +292,31 @@ static bool layer_switch_pressed = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
-        case MY_RAISE:
-            if (record->event.pressed) {
-                layer_switch_pressed = true;
-                layer_on(1);
-            } else {
-                layer_off(1);
-                if (layer_switch_pressed) {
-                    tap_code(KC_LNG2);
-                }
-                layer_switch_pressed = false;
-            }
-            break;
+        //case MY_RAISE:
+        //    if (record->event.pressed) {
+        //        layer_switch_pressed = true;
+        //        layer_on(1);
+        //    } else {
+        //        layer_off(1);
+        //        if (layer_switch_pressed) {
+        //            tap_code(KC_LNG2);
+        //        }
+        //        layer_switch_pressed = false;
+        //    }
+        //    break;
 
-        case MY_LOWER:
-            if (record->event.pressed) {
-                layer_switch_pressed = true;
-                layer_on(2);
-            } else {
-                layer_off(2);
-                if (layer_switch_pressed) {
-                    tap_code(KC_LNG1);
-                }
-                layer_switch_pressed = false;
-            }
-            break;
+        //case MY_LOWER:
+        //    if (record->event.pressed) {
+        //        layer_switch_pressed = true;
+        //        layer_on(2);
+        //    } else {
+        //        layer_off(2);
+        //        if (layer_switch_pressed) {
+        //            tap_code(KC_LNG1);
+        //        }
+        //        layer_switch_pressed = false;
+        //    }
+        //    break;
 
         case MYC_CLN:
             if (record->event.pressed) {
