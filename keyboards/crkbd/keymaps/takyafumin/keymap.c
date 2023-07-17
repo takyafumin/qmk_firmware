@@ -101,6 +101,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 // --------------------
 // キーのalias
 // --------------------
+#define CTLSPC   LCTL_T(KC_SPC)
 #define SFT_A    LSFT_T(KC_A)
 #define SFT_SCN  LSFT_T(KC_SCLN)
 #define SFT_F1   LSFT_T(KC_F1)
@@ -130,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,   GUI_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,ALT_SLSH, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                KC_LCTL,LT(1,L2),LT(3,SPC),   KC_ENT,LT(2,ESC),KC_RALT
+                                               LT(3,L1),LT(1,L2),  CTLSPC,     KC_ENT,LT(2,ESC),KC_RALT
                                             //`--------------------------'  `--------------------------'
   ),
 
@@ -148,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______, KC_LGUI, KC_HOME, KC_PGDN,  KC_END, _______,                      DD_RBRC, DD_BSLS,   KC_LT,   KC_GT, MYS_QES, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                                KC_LCTL, _______, _______,    KC_BSPC, KC_LNG1, _______
+                                                KC_LCTL, _______, _______,    KC_BSPC, _______, _______
                                             //`--------------------------'  `--------------------------'
         ),
 
@@ -166,13 +167,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_split_3x6_3(
        //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+           _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,    KC_7,    KC_8,    KC_9, XXXXXXX, _______,
        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-           XXXXXXX,  KC_APP, XXXXXXX, KC_WH_U, KC_WH_D, XXXXXXX,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_DEL, XXXXXXX,
+           _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,    KC_4,    KC_5,    KC_6,  KC_DEL, XXXXXXX,
        //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX,
+           _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,    KC_1,    KC_2,    KC_3, XXXXXXX, XXXXXXX,
        //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                               _______,   TG(3), _______,    _______,   TG(3), _______
+                                               _______, _______, _______,    _______, _______,    KC_0
                                            //`--------------------------'  `--------------------------'
   )
 };
